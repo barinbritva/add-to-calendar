@@ -1,21 +1,23 @@
 export abstract class DateHelper {
-  public static formatDateToYyyyMmDd(date: Date): string {
-    const dateYear = date.getFullYear();
-    const dateMonth = date.getMonth() + 1;
-    const dateDate = date.getDate();
+  public static dateToDateString(date: Date): string {
+    const year = date.getFullYear();
+    const month = DateHelper.addLeadingZeroIfNeeded(date.getMonth() + 1);
+    const day = DateHelper.addLeadingZeroIfNeeded(date.getDate());
 
-    return `${dateYear}-${DateHelper.addZero(dateMonth)}-${DateHelper.addZero(dateDate)}`;
+    return `${year}-${month}-${day}`;
   }
 
-  public static formatDateToYyyyMmDdTHhMmSsWithOffset(date: Date): string {
-    const dateYear = date.getFullYear();
-    const dateMonth = date.getMonth() + 1;
-    const dateDate = date.getDate();
+  public static dateToDateTimeWithOffset(date: Date): string {
+    const year = date.getUTCFullYear();
+    const month = DateHelper.addLeadingZeroIfNeeded(date.getUTCMonth() + 1);
+    const day = DateHelper.addLeadingZeroIfNeeded(date.getUTCDate());
+    const hours = DateHelper.addLeadingZeroIfNeeded(date.getUTCHours());
+    const minutes = DateHelper.addLeadingZeroIfNeeded(date.getUTCMinutes());
+    const seconds = DateHelper.addLeadingZeroIfNeeded(date.getUTCSeconds());
 
-    // todo refactor
-    // todo offset
-    return '' + dateYear + '-' + DateHelper.addZero(dateMonth) + '-' + DateHelper.addZero(dateDate) +
-     'T' + DateHelper.addZero(date.getHours()) + ':' + DateHelper.addZero(date.getMinutes()) + ':' + DateHelper.addZero(date.getSeconds());
+    // todo if offset is equal to 0, put Z, don not put Z in other case
+    return `${year}-${month}-${day}` +
+     `T${hours}:${minutes}:${seconds}Z`
   }
   
 
@@ -23,7 +25,7 @@ export abstract class DateHelper {
     return new Date(date.getTime());
   }
 
-  private static addZero(value: number): string {
+  private static addLeadingZeroIfNeeded(value: number): string {
     return value > 9 ? String(value) : '0' + value;
   }
 } 
