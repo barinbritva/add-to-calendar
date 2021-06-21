@@ -15,9 +15,8 @@ export abstract class DateHelper {
     const minutes = DateHelper.addLeadingZeroIfNeeded(date.getUTCMinutes());
     const seconds = DateHelper.addLeadingZeroIfNeeded(date.getUTCSeconds());
 
-    // todo if offset is equal to 0, put Z, don not put Z in other case
     return `${year}-${month}-${day}` +
-     `T${hours}:${minutes}:${seconds}Z`
+     `T${hours}:${minutes}:${seconds}.000Z`
   }
   
 
