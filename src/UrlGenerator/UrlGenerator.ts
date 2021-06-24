@@ -15,7 +15,7 @@ export abstract class UrlGenerator<Query extends QueryObject> implements Generat
     let queryParts: string[] = [];
 
     for (const key in data) {
-      const value = data [key];
+      const value = data[key];
 
       if (value == null) {
         continue;

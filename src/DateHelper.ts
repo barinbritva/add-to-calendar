@@ -7,7 +7,7 @@ export abstract class DateHelper {
     return `${year}-${month}-${day}`;
   }
 
-  public static dateToDateTimeWithOffset(date: Date): string {
+  public static dateToDateTimeString(date: Date): string {
     const year = date.getUTCFullYear();
     const month = DateHelper.addLeadingZeroIfNeeded(date.getUTCMonth() + 1);
     const day = DateHelper.addLeadingZeroIfNeeded(date.getUTCDate());
