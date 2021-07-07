@@ -7,6 +7,7 @@ interface QueryParameters extends QueryObject {
   title: string;
   st: string;
   et?: string;
+  dur?: string;
   desc?: string;
   in_loc?: string;
   inv_list?: string;
@@ -21,14 +22,15 @@ export class Yahoo extends UrlGenerator {
     const query: QueryParameters = {
       v: '60',
       title: event.title,
-      st: StringHelper.clearPunctuation(event.getStartDateAsString()),
+      st: StringHelper.clearPunctuation(event.getStartDateAsString()).replace('Z', '+0300'),
+      dur: '0004',
       desc: event.description,
       in_loc: event.location,
     }
 
-    if (!event.isAllDayEvent()) {
-      query.et = StringHelper.clearPunctuation(event.getEndDateAsString());
-    }
+    // if (!event.isAllDayEvent()) {
+    //   query.et = StringHelper.clearPunctuation(event.getEndDateAsString());
+    // }
 
     return query;
   }

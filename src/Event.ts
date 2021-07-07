@@ -1,18 +1,39 @@
 import {DateHelper} from './Utils/DateHelper';
 
-// TODO implement builder for setting optional params and chaining
-// TODO implement duration instead of endData to make changing startDate affects endDate (for changing timezoines for different users)
-// TODO support of attendees
-// TODO support of some specific fields like: online, busy, etc
-
 export class Event {
+  private _endDate?: Date | null;
+  private duration?: number | null;
+
   constructor(
     public title: string,
-    public startDate: Date,
-    public endDate?: Date,
+    private _startDate: Date,
+    endDateOrDuration?: Date | number | null,
     public description?: string,
     public location?: string
-  ) {}
+  ) {
+    this.setEndDate(endDateOrDuration);
+    this.assertDatesAreCorrect();
+  }
+
+  get startDate() {
+    return this._startDate;
+  }
+
+  get endDate() {
+    return this._endDate;
+  }
+
+  public reschedule(startDate: Date, endDateOrDuration?: Date | number | null): this {
+    this._startDate = startDate;
+    const end = endDateOrDuration === undefined && this.duration != null
+    ? this.duration
+    : endDateOrDuration
+    this.setEndDate(end);
+    
+    this.assertDatesAreCorrect();
+
+    return this;
+  }
 
   public isAllDayEvent(): boolean {
     return this.endDate == null;
@@ -32,6 +53,48 @@ export class Event {
     }
 
     return this.getDateAsString(endDate);
+  }
+
+  public changeTitle(value: string): this {
+    this.title = value;
+    return this;
+  }
+
+  public changeDescription(value: string): this {
+    this.description = value;
+    return this;
+  }
+
+  public changeLocation(value: string): this {
+    this.location = value;
+    return this;
+  }
+
+  private setEndDate(endDateOrDuration?: Date | number | null) {
+    if (endDateOrDuration === undefined) {
+      return;
+    }
+
+    if (typeof endDateOrDuration === 'number') {
+      this.duration = endDateOrDuration;
+      this._endDate = new Date(this._startDate.getTime() + this.duration * 60);
+    } else {
+      this.duration = null;
+      this._endDate = endDateOrDuration;
+    }
+  }
+
+  private assertDatesAreCorrect(): void {
+    if (this.endDate == null) {
+      return;
+    }
+
+    if (this.endDate <= this.startDate) {
+      throw new Error(
+        'End date must be greater than start date. ' +
+        `Passed: start date - ${this.startDate.toISOString()}, ` +
+        `end date - ${this.endDate.toISOString()}.`);
+    }
   }
 
   private getDateAsString(date: Date): string {
