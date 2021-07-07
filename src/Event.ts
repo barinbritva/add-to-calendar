@@ -34,8 +34,8 @@ export class Event {
     const end = endDateOrDuration === undefined && this.duration != null
     ? this.duration
     : endDateOrDuration
-    this.setEndDate(end);
     
+    this.setEndDate(end);
     this.assertDatesAreCorrect();
 
     return this;

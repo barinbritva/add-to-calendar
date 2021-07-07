@@ -1,12 +1,12 @@
 import { Event } from '../Event';
-import { Generator } from '../Generator';
+import { Generator } from './Generator';
 
 export interface DataPiece {
   key: string;
   value: string | undefined;
 }
 
-export class ICalendarGenerator implements Generator {
+export class ICalendar implements Generator {
   public createLink(event: Event): string {
     const eventData = this.convertEventToData(event);   
 

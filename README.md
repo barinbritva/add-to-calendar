@@ -63,7 +63,12 @@ event.reschedule(new Date(2021, 5, 18, 16, 00), 3 * 60)
 
 Creating correct dates for users in different timezones maybe complicated. It also depends in which environment you use the library - Node server, Node CLI/Browser. To avoid related issues `event-link-generator` converts all dates to `UTC` timezone. It's necessary to consider it when you constructs date objects. If you would like to know how to create correct dates in all possible cases, please, read the manual [How to work with dates]().
 
-# Credits
+## Wellknown issues
+
+Yahoo does not work properly with UTC timezone.
+
+
+## Credits
 
 The project is bootstrapped using [init-typescript-app](https://github.com/barinbritva/init-typescript-app).
 

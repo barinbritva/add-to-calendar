@@ -1,6 +1,6 @@
 import { Attendee } from '../Attendee';
 import {Event} from '../Event';
-import {Generator} from '../Generator';
+import {Generator} from './Generator';
 
 export type QueryObject = Record<string, string | undefined>;
 

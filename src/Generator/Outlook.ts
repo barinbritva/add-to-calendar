@@ -1,5 +1,5 @@
-import {QueryObject, UrlGenerator} from './UrlGenerator';
 import {Event} from '../Event';
+import {QueryObject, UrlGenerator} from './UrlGenerator';
 
 interface QueryParameters extends QueryObject {
   path: string;
