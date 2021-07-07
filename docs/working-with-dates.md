@@ -1,8 +1,12 @@
-
+* all day events - ok
+* if node in utc - ok
+* if node not in utc or cli/browser / You can create link for specific timezone
 
 
 
 ## How to create dates with correct timezone
+
+Creating correct dates for users in different timezones maybe complicated. It also depends in which environment you use the library - Node server, Node CLI/Browser. To avoid related issues `event-link-generator` converts all dates to `UTC` timezone. It's necessary to consider it when you constructs date objects. If you would like to know how to create correct dates in all possible cases, please, read the manual [How to work with dates]().
 
 All dates are passed to `Event` will convert to UTC timezone. It's really important to understand how to create global events or events for specific user.
 

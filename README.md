@@ -1,84 +1,77 @@
-# Event Link Generator
+# 📅 Event Link Generator
 
-Create links to add events via `Outlook`, `Google`, `Yahoo` calendars or using `icl` file.
+Generate event links to add them to a calendar.
 
-## Creating events
+Supported services: `Outlook`, `Office365`, `Google` and `Yahoo`. You are also able to use `ICalendar` to create downloadable links to `ics` files.
 
-__Create all day event:__
+## 🚀 Getting started
 
-```typescript
-const allDayEvent = new Event(
-  'Hiking',
-  new Date(2021, 5, 18),
-  null,
-  'Here is the place: https://www.tripadvisor.com/Attraction_Review-g32655-d144152-Reviews-Hollywood_Sign-Los_Angeles_California.html',
-  'Hollywood Hills, Los Angeles'
-);
+Install package:
+```bash
+npm install --save event-link-generator
 ```
 
-__Create event with specific date and time:__
+Import entities:
+```typescript
+import {Event, Outlook, Google, MultiGenerator} from 'event-link-generator'
+```
 
+Create an event:
 ```typescript
 const event = new Event(
   'Meet with friends',
   new Date(2021, 5, 18, 15, 00),
   new Date(2021, 5, 18, 17, 00),
-  '',
+  'It\'s Bill\'s birthday today!',
   'Blue Bottle Coffee, 300 S Broadway, Los Angeles'
-);
+)
 ```
 
-To reschedule the event just use `reschedule` method with new start and end dates:
-
+Create link by link:
 ```typescript
-event.reschedule(new Date(2021, 5, 18, 16, 00), new Date(2021, 5, 18, 18, 00))
+const outlookLink = new Outlook().createLink(event)
+const googleLink = new Google().createLink(event)
+
+console.log(outlookLink, googleLink)
 ```
 
-__Create event with specific date and time using duration:__
-
+Create a bunch of links:
 ```typescript
-const event = new Event(
-  'Meet with friends',
-  new Date(2021, 5, 18, 15, 00),
-  2 * 60,
-  '',
-  'Blue Bottle Coffee, 300 S Broadway, Los Angeles'
-);
+// Create generators you are going to use
+// Key names doesn't matter, it's up to you
+const generators = {
+  outlook: new Outlook(),
+  office365: new Office365(),
+  google: new Google(),
+  yahoo: new Yahoo(),
+  ics: new ICalendar()
+}
+
+const multiGenerator = new MultiGenerator(generators);
+
+// Object of keys/values - key => link
+const linksObject = multiGenerator.createLinks(event)
+// Array (tuple) of pairs key/link - [key, link][]
+const array = multiGenerator.createLinks(event, true)
 ```
 
-To reschedule the event it's enough to change only start date, end date will be recalculated automatically:
+## 🐛 Wellknown issues
 
-```typescript
-event.reschedule(new Date(2021, 5, 18, 16, 00))
-```
+* __Yahoo does not work properly with UTC timezone__. Currently Looking to workarounds.
 
-You are also able to change start date and duration in the same time:
+## 💡 Guides
 
-```typescript
-event.reschedule(new Date(2021, 5, 18, 16, 00), 3 * 60)
-```
+* __`Event` API__. Creation and managing events.
+* __`Date` creation__. Avoiding throubles with time zones.
 
+## 🔙 Feedback
+Your feedback is really important for the project. Please, use contacts from my profile to send your questions, suggestions, help requests and others. Also, feel free to use issues section to report bugs and problems.
 
-## Timezones troubleshooting
+## 🌟 Credits
 
-Creating correct dates for users in different timezones maybe complicated. It also depends in which environment you use the library - Node server, Node CLI/Browser. To avoid related issues `event-link-generator` converts all dates to `UTC` timezone. It's necessary to consider it when you constructs date objects. If you would like to know how to create correct dates in all possible cases, please, read the manual [How to work with dates]().
+* The project is bootstrapped using [init-typescript-app](https://github.com/barinbritva/init-typescript-app).
+* Special thanks for information about calendar APIs to [add-event-to-calendar-docs](https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs) repo.
 
-## Wellknown issues
+---
 
-Yahoo does not work properly with UTC timezone.
-
-
-## Credits
-
-The project is bootstrapped using [init-typescript-app](https://github.com/barinbritva/init-typescript-app).
-
-https://www.litmus.com/blog/how-to-create-an-add-to-calendar-link-for-your-emails/
-
-https://github.com/AnandChowdhary/calendar-link
-
-https://github.com/jshor/datebook
-
-https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs
-
-
-https://ical.marudot.com/
+MIT, see [LICENSE](https://github.com/barinbritva/event-link-generator/blob/master/LICENSE) for the details.
