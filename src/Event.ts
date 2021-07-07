@@ -1,3 +1,4 @@
+import {Attendee} from './Attendee';
 import {DateHelper} from './Utils/DateHelper';
 
 export class Event {
@@ -9,7 +10,8 @@ export class Event {
     private _startDate: Date,
     endDateOrDuration?: Date | number | null,
     public description?: string,
-    public location?: string
+    public location?: string,
+    private _attendees: Attendee[] = []
   ) {
     this.setEndDate(endDateOrDuration);
     this.assertDatesAreCorrect();
@@ -21,6 +23,10 @@ export class Event {
 
   get endDate() {
     return this._endDate;
+  }
+
+  get attendees() {
+    return this._attendees;
   }
 
   public reschedule(startDate: Date, endDateOrDuration?: Date | number | null): this {
@@ -68,6 +74,20 @@ export class Event {
   public changeLocation(value: string): this {
     this.location = value;
     return this;
+  }
+
+  public addAttendees(...attendees: Attendee[]): this {
+    this._attendees.concat(attendees);
+    return this;
+  }
+
+  public clearAttendees(): this {
+    this._attendees = [];
+    return this;
+  }
+
+  public hasAttendees(): boolean {
+    return this._attendees.length > 0;
   }
 
   private setEndDate(endDateOrDuration?: Date | number | null) {

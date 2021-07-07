@@ -24,7 +24,10 @@ export class Google extends UrlGenerator {
       dates: StringHelper.clearPunctuation(event.getStartDateAsString()) +
         '/' + StringHelper.clearPunctuation(event.getEndDateAsString()),
       details: event.description,
-      location: event.location
+      location: event.location,
+      add: event.hasAttendees()
+        ? this.convertAttendeesToString(event.attendees)
+        : undefined
     }
   }
 }

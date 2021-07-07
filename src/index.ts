@@ -15,7 +15,8 @@ const event = new Event(
   new Date(2021, 5, 18, 22, 5),
   new Date(2021, 5, 18, 22, 9),
   'Here is the link: https://bing.com?q=skype. ;',
-  'California'
+  'California',
+  [['p.kasatkina@yandex.ru', 'Polina Kasatkina'], 'barinbritva@example.com']
 );
 const allDayEvent = new Event(
   'Test',

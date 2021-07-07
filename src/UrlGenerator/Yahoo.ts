@@ -19,19 +19,16 @@ export class Yahoo extends UrlGenerator {
   protected urlBase = 'https://calendar.yahoo.com/';
 
   protected convertEventToQueryObject(event: Event): QueryParameters {
-    const query: QueryParameters = {
+    return {
       v: '60',
       title: event.title,
-      st: StringHelper.clearPunctuation(event.getStartDateAsString()).replace('Z', '+0300'),
-      dur: '0004',
+      st: StringHelper.clearPunctuation(event.getStartDateAsString()),
+      et: StringHelper.clearPunctuation(event.getEndDateAsString()),
       desc: event.description,
       in_loc: event.location,
+      inv_list: event.hasAttendees()
+        ? this.convertAttendeesToString(event.attendees)
+        : undefined
     }
-
-    // if (!event.isAllDayEvent()) {
-    //   query.et = StringHelper.clearPunctuation(event.getEndDateAsString());
-    // }
-
-    return query;
   }
 }
