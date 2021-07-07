@@ -1,4 +1,4 @@
-import { DateHelper } from './DateHelper';
+import {DateHelper} from './Utils/DateHelper';
 
 // TODO implement builder for setting optional params and chaining
 // TODO implement duration instead of endData to make changing startDate affects endDate (for changing timezoines for different users)
@@ -18,11 +18,11 @@ export class Event {
     return this.endDate == null;
   }
 
-  public getStartDateAsString(noSeparators = false): string {
-    return this.getDateAsString(this.startDate, noSeparators);
+  public getStartDateAsString(): string {
+    return this.getDateAsString(this.startDate);
   }
 
-  public getEndDateAsString(noSeparators = false): string {
+  public getEndDateAsString(): string {
     let endDate = this.endDate;
 
     if (endDate == null) {
@@ -31,16 +31,14 @@ export class Event {
       endDate.setDate(startDate.getDate() + 1);
     }
 
-    return this.getDateAsString(endDate, noSeparators);
+    return this.getDateAsString(endDate);
   }
 
-  private getDateAsString(date: Date, noSeparators?: boolean): string {
-    const separator = noSeparators ? '' : undefined
-
+  private getDateAsString(date: Date): string {
     if (this.isAllDayEvent()) {
-      return DateHelper.dateToDateString(date, separator);
+      return DateHelper.dateToDateString(date);
     }
 
-    return DateHelper.dateToDateTimeString(date, separator, separator);
+    return DateHelper.dateToDateTimeString(date);
   }
 }

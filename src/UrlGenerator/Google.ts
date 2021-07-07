@@ -1,4 +1,5 @@
 import {Event} from '../Event';
+import {StringHelper} from '../Utils/StringHelper';
 import {QueryObject, UrlGenerator} from './UrlGenerator';
 
 interface QueryParameters extends QueryObject {
@@ -20,7 +21,8 @@ export class Google extends UrlGenerator {
     return {
       action: 'TEMPLATE',
       text: event.title,
-      dates: `${event.getStartDateAsString(true)}/${event.getEndDateAsString(true)}`,
+      dates: StringHelper.clearPunctuation(event.getStartDateAsString()) +
+        '/' + StringHelper.clearPunctuation(event.getEndDateAsString()),
       details: event.description,
       location: event.location
     }

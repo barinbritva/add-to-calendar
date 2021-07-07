@@ -1,4 +1,5 @@
 import {Event} from '../Event';
+import {StringHelper} from '../Utils/StringHelper';
 import {QueryObject, UrlGenerator} from './UrlGenerator';
 
 interface QueryParameters extends QueryObject {
@@ -20,13 +21,13 @@ export class Yahoo extends UrlGenerator {
     const query: QueryParameters = {
       v: '60',
       title: event.title,
-      st: event.getStartDateAsString(true),
+      st: StringHelper.clearPunctuation(event.getStartDateAsString()),
       desc: event.description,
       in_loc: event.location,
     }
 
     if (!event.isAllDayEvent()) {
-      query.et = event.getEndDateAsString(true)
+      query.et = StringHelper.clearPunctuation(event.getEndDateAsString());
     }
 
     return query;
