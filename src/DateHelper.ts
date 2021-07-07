@@ -1,13 +1,17 @@
 export abstract class DateHelper {
-  public static dateToDateString(date: Date): string {
+  public static dateToDateString(date: Date, separator = '-'): string {
     const year = date.getFullYear();
     const month = DateHelper.addLeadingZeroIfNeeded(date.getMonth() + 1);
     const day = DateHelper.addLeadingZeroIfNeeded(date.getDate());
 
-    return `${year}-${month}-${day}`;
+    return `${year}${separator}${month}${separator}${day}`;
   }
 
-  public static dateToDateTimeString(date: Date): string {
+  public static dateToDateTimeString(
+    date: Date,
+    dateSeparator = '-',
+    timeSeparator = ':'
+  ): string {
     const year = date.getUTCFullYear();
     const month = DateHelper.addLeadingZeroIfNeeded(date.getUTCMonth() + 1);
     const day = DateHelper.addLeadingZeroIfNeeded(date.getUTCDate());
@@ -15,8 +19,8 @@ export abstract class DateHelper {
     const minutes = DateHelper.addLeadingZeroIfNeeded(date.getUTCMinutes());
     const seconds = DateHelper.addLeadingZeroIfNeeded(date.getUTCSeconds());
 
-    return `${year}-${month}-${day}` +
-     `T${hours}:${minutes}:${seconds}.000Z`
+    return `${year}${dateSeparator}${month}${dateSeparator}${day}` +
+     `T${hours}${timeSeparator}${minutes}${timeSeparator}${seconds}Z`
   }
   
 

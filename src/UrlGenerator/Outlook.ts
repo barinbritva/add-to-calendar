@@ -1,7 +1,7 @@
 import {QueryObject, UrlGenerator} from './UrlGenerator';
 import {Event} from '../Event';
 
-export interface OutlookQuery extends QueryObject {
+interface QueryParameters extends QueryObject {
   path: string;
   rru: string;
   subject: string;
@@ -10,16 +10,16 @@ export interface OutlookQuery extends QueryObject {
   allday?: string;
   body?: string;
   location?: string;
-  online?: string;
+  online?: 'true' | 'false';
   to?: string;
   cc?: string;
 }
 
-export class OutlookGenerator extends UrlGenerator<OutlookQuery> {
+export class Outlook extends UrlGenerator {
   protected urlBase = 'https://outlook.live.com/calendar/0/deeplink/compose';
 
-  protected convertEventToQueryObject(event: Event): OutlookQuery {
-    const query: OutlookQuery = {
+  protected convertEventToQueryObject(event: Event): QueryParameters {
+    const query: QueryParameters = {
       path: '/calendar/action/compose',
       rru: 'addevent',
       subject: event.title,

@@ -18,29 +18,29 @@ export class Event {
     return this.endDate == null;
   }
 
-  public getStartDateAsString(): string {
-    return this.getDateAsString(this.startDate);
+  public getStartDateAsString(noSeparators = false): string {
+    return this.getDateAsString(this.startDate, noSeparators);
   }
 
-  public getEndDateAsString(): string {
-    if (this.endDate == null) {
-      const startDate = this.startDate;
-      let endDate: Date;
+  public getEndDateAsString(noSeparators = false): string {
+    let endDate = this.endDate;
 
+    if (endDate == null) {
+      const startDate = this.startDate;
       endDate = DateHelper.cloneDate(startDate);
       endDate.setDate(startDate.getDate() + 1);
-
-      return this.getDateAsString(endDate);
     }
 
-    return this.getDateAsString(this.endDate);
+    return this.getDateAsString(endDate, noSeparators);
   }
 
-  private getDateAsString(date: Date): string {
+  private getDateAsString(date: Date, noSeparators?: boolean): string {
+    const separator = noSeparators ? '' : undefined
+
     if (this.isAllDayEvent()) {
-      return DateHelper.dateToDateString(date);
+      return DateHelper.dateToDateString(date, separator);
     }
 
-    return DateHelper.dateToDateTimeString(date);
+    return DateHelper.dateToDateTimeString(date, separator, separator);
   }
 }
