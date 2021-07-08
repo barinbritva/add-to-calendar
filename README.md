@@ -1,6 +1,6 @@
 # 📅 Event Link Generator
 
-[![Dependencies counter](https://img.shields.io/badge/dependencies-0-brightgreen?style=flat-square)](https://github.com/barinbritva/event-link-generator/blob/master/package.json)
+[![Dependencies counter](https://img.shields.io/badge/dependencies-none-green?style=flat-square)](https://github.com/barinbritva/event-link-generator/blob/master/package.json)
 [![License](https://img.shields.io/npm/l/micromatch?style=flat-square)](https://github.com/barinbritva/event-link-generator/blob/master/LICENSE)
 
 Generate event links to add them to a calendar.
@@ -64,12 +64,8 @@ const array = multiGenerator.createLinks(event, true)
 
 ## 💡 Guides
 
-|Method|Arguments|Description|
-|------|---------|-----------|
-
-
-* __`Event` API__. Creation and managing events.
-* __`Date` creation__. Avoiding troubles with time zones.
+* [`Event` API](https://barinbritva.github.io/event-link-generator/classes/event.html). Read how to create and manage events.
+* `Date` creation. Avoiding troubles with time zones. _(Coming soon)_
 
 ## 🔙 Feedback
 Your feedback is really important for the project. Please, use contacts from my profile to send your questions, suggestions, help requests and others. Also, feel free to use issues section to report bugs and problems.
