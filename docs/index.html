@@ -1,0 +1,214 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@barinbritva/event-link-generator</title>
+	<meta name="description" content="Documentation for @barinbritva/event-link-generator">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@barinbritva/event-link-generator</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@barinbritva/event-link-generator</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#📅-event-link-generator" id="📅-event-link-generator" style="color: inherit; text-decoration: none;">
+					<h1>📅 Event Link Generator</h1>
+				</a>
+				<p>Generate event links to add them to a calendar.</p>
+				<p>Supported services: <code>Outlook</code>, <code>Office365</code>, <code>Google</code> and <code>Yahoo</code>. You are also able to use <code>ICalendar</code> to create downloadable links to <code>ics</code> files.</p>
+				<a href="#🚀-getting-started" id="🚀-getting-started" style="color: inherit; text-decoration: none;">
+					<h2>🚀 Getting started</h2>
+				</a>
+				<p>Install package:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install --save @barinbritva/event-link-generator</span>
+</code></pre>
+				<p>Import entities:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">Event</span><span style="color: #000000">, </span><span style="color: #001080">Outlook</span><span style="color: #000000">, </span><span style="color: #001080">Google</span><span style="color: #000000">, </span><span style="color: #001080">MultiGenerator</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@barinbritva/event-link-generator&#039;</span>
+</code></pre>
+				<p>Create an event:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Event</span><span style="color: #000000">(</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;Meet with friends&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(</span><span style="color: #098658">2021</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #098658">18</span><span style="color: #000000">, </span><span style="color: #098658">15</span><span style="color: #000000">, </span><span style="color: #098658">00</span><span style="color: #000000">),</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(</span><span style="color: #098658">2021</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #098658">18</span><span style="color: #000000">, </span><span style="color: #098658">17</span><span style="color: #000000">, </span><span style="color: #098658">00</span><span style="color: #000000">),</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s Bill</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s birthday today!&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;Blue Bottle Coffee, 300 S Broadway, Los Angeles&#039;</span>
+<span style="color: #000000">)</span>
+</code></pre>
+				<p>Create link by link:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">outlookLink</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Outlook</span><span style="color: #000000">().</span><span style="color: #795E26">createLink</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">googleLink</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Google</span><span style="color: #000000">().</span><span style="color: #795E26">createLink</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">outlookLink</span><span style="color: #000000">, </span><span style="color: #001080">googleLink</span><span style="color: #000000">)</span>
+</code></pre>
+				<p>Create a bunch of links:</p>
+				<pre><code class="language-typescript"><span style="color: #008000">// Create generators you are going to use</span>
+<span style="color: #008000">// Key names doesn&#039;t matter, it&#039;s up to you</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">generators</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">outlook:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Outlook</span><span style="color: #000000">(),</span>
+<span style="color: #000000">  </span><span style="color: #001080">office365:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Office365</span><span style="color: #000000">(),</span>
+<span style="color: #000000">  </span><span style="color: #001080">google:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Google</span><span style="color: #000000">(),</span>
+<span style="color: #000000">  </span><span style="color: #001080">yahoo:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Yahoo</span><span style="color: #000000">(),</span>
+<span style="color: #000000">  </span><span style="color: #001080">ics:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ICalendar</span><span style="color: #000000">()</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">multiGenerator</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">MultiGenerator</span><span style="color: #000000">(</span><span style="color: #001080">generators</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Object of keys/values - key =&gt; link</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">linksObject</span><span style="color: #000000"> = </span><span style="color: #001080">multiGenerator</span><span style="color: #000000">.</span><span style="color: #795E26">createLinks</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">)</span>
+<span style="color: #008000">// Array (tuple) of pairs key/link - [key, link][]</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">array</span><span style="color: #000000"> = </span><span style="color: #001080">multiGenerator</span><span style="color: #000000">.</span><span style="color: #795E26">createLinks</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#🐛-wellknown-issues" id="🐛-wellknown-issues" style="color: inherit; text-decoration: none;">
+					<h2>🐛 Wellknown issues</h2>
+				</a>
+				<ul>
+					<li><strong>Yahoo does not work properly with UTC timezone</strong>. Currently looking if there are any workarounds.</li>
+				</ul>
+				<a href="#💡-guides" id="💡-guides" style="color: inherit; text-decoration: none;">
+					<h2>💡 Guides</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Method</th>
+							<th>Arguments</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+				</table>
+				<ul>
+					<li><strong><code>Event</code> API</strong>. Creation and managing events.</li>
+					<li><strong><code>Date</code> creation</strong>. Avoiding troubles with time zones.</li>
+				</ul>
+				<a href="#🔙-feedback" id="🔙-feedback" style="color: inherit; text-decoration: none;">
+					<h2>🔙 Feedback</h2>
+				</a>
+				<p>Your feedback is really important for the project. Please, use contacts from my profile to send your questions, suggestions, help requests and others. Also, feel free to use issues section to report bugs and problems.</p>
+				<a href="#🌟-credits" id="🌟-credits" style="color: inherit; text-decoration: none;">
+					<h2>🌟 Credits</h2>
+				</a>
+				<ul>
+					<li>Special thanks for information about calendar APIs to <a href="https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs">add-event-to-calendar-docs</a> repo.</li>
+					<li>The project is bootstrapped using <a href="https://github.com/barinbritva/init-typescript-app">init-typescript-app</a>.</li>
+				</ul>
+				<hr>
+				<p>MIT, see <a href="https://github.com/barinbritva/event-link-generator/blob/master/LICENSE">LICENSE</a> for the details.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/google.html" class="tsd-kind-icon">Google</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/icalendar.html" class="tsd-kind-icon">ICalendar</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/multigenerator.html" class="tsd-kind-icon">Multi<wbr>Generator</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/office365.html" class="tsd-kind-icon">Office365</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/outlook.html" class="tsd-kind-icon">Outlook</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/yahoo.html" class="tsd-kind-icon">Yahoo</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#attendee" class="tsd-kind-icon">Attendee</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,5 +1,8 @@
 # 📅 Event Link Generator
 
+[![Dependencies counter](https://img.shields.io/badge/dependencies-0-brightgreen?style=flat-square)](https://github.com/barinbritva/event-link-generator/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/micromatch?style=flat-square)](https://github.com/barinbritva/event-link-generator/blob/master/LICENSE)
+
 Generate event links to add them to a calendar.
 
 Supported services: `Outlook`, `Office365`, `Google` and `Yahoo`. You are also able to use `ICalendar` to create downloadable links to `ics` files.
@@ -60,6 +63,10 @@ const array = multiGenerator.createLinks(event, true)
 * __Yahoo does not work properly with UTC timezone__. Currently looking if there are any workarounds.
 
 ## 💡 Guides
+
+|Method|Arguments|Description|
+|------|---------|-----------|
+
 
 * __`Event` API__. Creation and managing events.
 * __`Date` creation__. Avoiding troubles with time zones.

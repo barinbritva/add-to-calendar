@@ -1,19 +1,37 @@
 import {Attendee} from './Attendee';
 import {DateHelper} from './Utils/DateHelper';
 
+/**
+ * Event entity
+ * 
+ * Contains title, dates of start and end, description, location and attendees.
+ */
 export class Event {
-  private _endDate?: Date | null;
-  private duration?: number | null;
+  private _startDate: Date;
+  private _endDate: Date | null = null;
+  private duration: number | null = null;
+  private _attendees: Attendee[];
 
+  /**
+   * @param title - Event title.
+   * @param startDate - Event start date and time. For all day events it's enough to pass only date without time.
+   * @param endDateOrDuration - Event date end or event duration in minutes. Leave empty for all day events.
+   * @param description - Details about the event.
+   * @param location - Place of the event. Just any address string.
+   * @param attendees - List of people to invite.
+   */
   constructor(
     public title: string,
-    private _startDate: Date,
+    startDate: Date,
     endDateOrDuration?: Date | number | null,
     public description?: string,
     public location?: string,
-    private _attendees: Attendee[] = []
+    attendees: Attendee[] = []
   ) {
+    this._startDate = startDate;
     this.setEndDate(endDateOrDuration);
+    this._attendees = attendees;
+
     this.assertDatesAreCorrect();
   }
 
@@ -22,13 +40,38 @@ export class Event {
   }
 
   get endDate() {
-    return this._endDate;
+    return this._endDate || this.getNextDayAfterStartDate();
   }
 
   get attendees() {
     return this._attendees;
   }
 
+  /**
+   * Reschedule the event.
+   * 
+   * ```typescript
+   * // manage all day event
+   * const event = new Event('Hiking', new Date(2021, 6, 8))
+   * event.reschedule(new Date(2021, 6, 8))
+   * 
+   * // covert general event to all day
+   * event.reschedule(new Date(2021, 6, 8), null)
+   * 
+   * // change start date and time and set duration
+   * event.reschedule(new Date(2021, 6, 8, 12, 0), 45)
+   * 
+   * // change start date and time, but leave the same duration
+   * event.reschedule(new Date(2021, 6, 8, 13, 0))
+   * 
+   * // use end date instead of duration
+   * event.reschedule(new Date(2021, 6, 8, 13, 0), new Date(2021, 6, 8, 13, 45))
+   * ```
+   * 
+   * @param startDate - Event start date and/or time.
+   * @param endDateOrDuration - Event date end or event duration in minutes. Leave empty for all day events or keep previously set duration.
+   * @returns The event. You can chain this method.
+   */
   public reschedule(startDate: Date, endDateOrDuration?: Date | number | null): this {
     this._startDate = startDate;
     const end = endDateOrDuration === undefined && this.duration != null
@@ -41,8 +84,13 @@ export class Event {
     return this;
   }
 
+  /**
+   * Check if the event is all day long
+   * 
+   * @returns Event is all day or not.
+   */
   public isAllDayEvent(): boolean {
-    return this.endDate == null;
+    return this._endDate == null;
   }
 
   public getStartDateAsString(): string {
@@ -50,15 +98,7 @@ export class Event {
   }
 
   public getEndDateAsString(): string {
-    let endDate = this.endDate;
-
-    if (endDate == null) {
-      const startDate = this.startDate;
-      endDate = DateHelper.cloneDate(startDate);
-      endDate.setDate(startDate.getDate() + 1);
-    }
-
-    return this.getDateAsString(endDate);
+    return this.getDateAsString(this.endDate);
   }
 
   public changeTitle(value: string): this {
@@ -90,6 +130,14 @@ export class Event {
     return this._attendees.length > 0;
   }
 
+  private getNextDayAfterStartDate(): Date {
+    const startDate = this.startDate;
+    const endDate = DateHelper.cloneDate(startDate);
+    endDate.setDate(startDate.getDate() + 1);
+
+    return endDate;
+  }
+
   private setEndDate(endDateOrDuration?: Date | number | null) {
     if (endDateOrDuration === undefined) {
       return;
@@ -105,15 +153,15 @@ export class Event {
   }
 
   private assertDatesAreCorrect(): void {
-    if (this.endDate == null) {
+    if (this._endDate == null) {
       return;
     }
 
-    if (this.endDate <= this.startDate) {
+    if (this._endDate <= this.startDate) {
       throw new Error(
         'End date must be greater than start date. ' +
         `Passed: start date - ${this.startDate.toISOString()}, ` +
-        `end date - ${this.endDate.toISOString()}.`);
+        `end date - ${this._endDate.toISOString()}.`);
     }
   }
 
