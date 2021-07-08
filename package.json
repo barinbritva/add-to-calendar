@@ -1,5 +1,5 @@
 {
-  "name": "event-link-generator",
+  "name": "@barinbritva/event-link-generator",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "files": [
@@ -17,7 +17,9 @@
     "release": "ts-node ./tasks/run-release.ts"
   },
   "author": {
-    "name": "Barin Britva"
+    "name": "Barin Britva",
+    "email": "barinbritva@outlook.com",
+    "url": "https://barinbritva.ru"
   },
   "license": "MIT",
   "devDependencies": {

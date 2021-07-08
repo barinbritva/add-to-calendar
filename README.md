@@ -8,12 +8,12 @@ Supported services: `Outlook`, `Office365`, `Google` and `Yahoo`. You are also a
 
 Install package:
 ```bash
-npm install --save event-link-generator
+npm install --save @barinbritva/event-link-generator
 ```
 
 Import entities:
 ```typescript
-import {Event, Outlook, Google, MultiGenerator} from 'event-link-generator'
+import {Event, Outlook, Google, MultiGenerator} from '@barinbritva/event-link-generator'
 ```
 
 Create an event:
@@ -57,20 +57,20 @@ const array = multiGenerator.createLinks(event, true)
 
 ## 🐛 Wellknown issues
 
-* __Yahoo does not work properly with UTC timezone__. Currently Looking to workarounds.
+* __Yahoo does not work properly with UTC timezone__. Currently looking if there are any workarounds.
 
 ## 💡 Guides
 
 * __`Event` API__. Creation and managing events.
-* __`Date` creation__. Avoiding throubles with time zones.
+* __`Date` creation__. Avoiding troubles with time zones.
 
 ## 🔙 Feedback
 Your feedback is really important for the project. Please, use contacts from my profile to send your questions, suggestions, help requests and others. Also, feel free to use issues section to report bugs and problems.
 
 ## 🌟 Credits
 
-* The project is bootstrapped using [init-typescript-app](https://github.com/barinbritva/init-typescript-app).
 * Special thanks for information about calendar APIs to [add-event-to-calendar-docs](https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs) repo.
+* The project is bootstrapped using [init-typescript-app](https://github.com/barinbritva/init-typescript-app).
 
 ---
 
