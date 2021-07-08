@@ -68,7 +68,7 @@ const array = multiGenerator.createLinks(event, true)
 * `Date` creation. Avoiding troubles with time zones. _(Coming soon)_
 
 ## 🔙 Feedback
-Your feedback is really important for the project. Please, use contacts from my profile to send your questions, suggestions, help requests and others. Also, feel free to use issues section to report bugs and problems.
+Your feedback is really important for the project. Please, use contacts from [my profile](https://github.com/barinbritva) to send your questions, suggestions, help requests and others. Also, feel free to use [issues](https://github.com/barinbritva/event-link-generator/issues) section to report bugs and problems.
 
 ## 🌟 Credits
 
