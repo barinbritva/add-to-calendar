@@ -1,0 +1,22 @@
+name: Build
+on: [pull_request]
+jobs:
+  check-app:
+    name: Check App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - run: pnpm -r --frozen-lockfile install
+
+      - name: Check build
+        run: pnpm build
+
+      - name: Run tests
+        run: pnpm test
