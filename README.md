@@ -23,8 +23,8 @@ Create an event:
 ```typescript
 const event = new Event(
   'Meet with friends',
-  new Date(2021, 5, 18, 15, 00),
-  new Date(2021, 5, 18, 17, 00),
+  new Date(2021, 5, 18, 15, 0),
+  new Date(2021, 5, 18, 17, 0),
   'It\'s Bill\'s birthday today!',
   'Blue Bottle Coffee, 300 S Broadway, Los Angeles'
 )
