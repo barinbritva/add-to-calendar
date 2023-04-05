@@ -25,7 +25,13 @@ jobs:
       - name: Run tests
         run: pnpm test
 
+      - name: Create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+
       - name: Publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public
+
+      - name: Delete .npmrc
+        run: rm .npmrc
