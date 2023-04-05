@@ -28,7 +28,7 @@ export async function build(mode: 'production' | 'development'): Promise<string>
 
 	if (fs.existsSync(distPath)) {
 		console.info('Removing previous build...');
-		fs.rmdirSync(distPath, {recursive: true});
+		fs.rmSync(distPath, {recursive: true});
 	}
 
 	console.info('Running command: ' + buildCommand);
