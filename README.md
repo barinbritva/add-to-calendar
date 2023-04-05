@@ -1,9 +1,9 @@
-# 📅 Event Link Generator
+# 📅 Add to Calendar
 
-[![Dependencies counter](https://img.shields.io/badge/dependencies-none-green?style=flat-square)](https://github.com/barinbritva/event-link-generator/blob/master/package.json)
-[![License](https://img.shields.io/npm/l/micromatch?style=flat-square)](https://github.com/barinbritva/event-link-generator/blob/master/LICENSE)
+[![Dependencies counter](https://img.shields.io/badge/dependencies-none-green?style=flat-square)](https://github.com/barinbritva/add-to-calendar/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/micromatch?style=flat-square)](https://github.com/barinbritva/add-to-calendar/blob/master/LICENSE)
 
-Generate event links to add them to a calendar.
+Create event links to add them to a calendar.
 
 Supported services: `Outlook`, `Office365`, `Google` and `Yahoo`. You are also able to use `ICalendar` to create downloadable links to `ics` files.
 
@@ -11,12 +11,12 @@ Supported services: `Outlook`, `Office365`, `Google` and `Yahoo`. You are also a
 
 Install package:
 ```bash
-npm install --save @barinbritva/event-link-generator
+npm install --save @barinbritva/add-to-calendar
 ```
 
 Import entities:
 ```typescript
-import {Event, Outlook, Google, MultiGenerator} from '@barinbritva/event-link-generator'
+import {Event, Outlook, Google, MultiGenerator} from '@barinbritva/add-to-calendar'
 ```
 
 Create an event:
@@ -64,11 +64,11 @@ const array = multiGenerator.createLinks(event, true)
 
 ## 💡 Guides
 
-* [`Event` API](https://barinbritva.github.io/event-link-generator/classes/event.html). Read how to create and manage events.
+* [`Event` API](https://barinbritva.github.io/add-to-calendar/classes/event.html). Read how to create and manage events.
 * `Date` creation. Avoiding troubles with time zones. _(Coming soon)_
 
 ## 🔙 Feedback
-Your feedback is really important for the project. Please, use contacts from [my profile](https://github.com/barinbritva) to send your questions, suggestions, help requests and others. Also, feel free to use [issues](https://github.com/barinbritva/event-link-generator/issues) section to report bugs and problems.
+Your feedback is really important for the project. Please, use contacts from [my profile](https://github.com/barinbritva) to send your questions, suggestions, help requests and others. Also, feel free to use [issues](https://github.com/barinbritva/add-to-calendar/issues) section to report bugs and problems.
 
 ## 🌟 Credits
 
@@ -77,4 +77,4 @@ Your feedback is really important for the project. Please, use contacts from [my
 
 ---
 
-MIT, see [LICENSE](https://github.com/barinbritva/event-link-generator/blob/master/LICENSE) for the details.
+MIT, see [LICENSE](https://github.com/barinbritva/add-to-calendar/blob/master/LICENSE) for the details.
