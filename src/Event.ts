@@ -29,7 +29,7 @@ export class Event {
 		attendees: Attendee[] = []
 	) {
 		this._startDate = startDate;
-		this.setEndDate(endDateOrDuration);
+		this.setEndDate(this.handleDurationInput(endDateOrDuration));
 		this._attendees = attendees;
 
 		this.assertDatesAreCorrect();
@@ -75,7 +75,9 @@ export class Event {
 	public reschedule(startDate: Date, endDateOrDuration?: Date | number | null): this {
 		this._startDate = startDate;
 		const end =
-			endDateOrDuration === undefined && this.duration != null ? this.duration : endDateOrDuration;
+			endDateOrDuration === undefined && this.duration != null
+				? this.duration
+				: this.handleDurationInput(endDateOrDuration);
 
 		this.setEndDate(end);
 		this.assertDatesAreCorrect();
@@ -116,7 +118,7 @@ export class Event {
 	}
 
 	public addAttendees(...attendees: Attendee[]): this {
-		this._attendees.concat(attendees);
+		this._attendees.push(...attendees);
 		return this;
 	}
 
@@ -144,7 +146,7 @@ export class Event {
 
 		if (typeof endDateOrDuration === 'number') {
 			this.duration = endDateOrDuration;
-			this._endDate = new Date(this._startDate.getTime() + this.duration * 60);
+			this._endDate = new Date(this._startDate.getTime() + this.duration);
 		} else {
 			this.duration = null;
 			this._endDate = endDateOrDuration;
@@ -171,5 +173,15 @@ export class Event {
 		}
 
 		return DateHelper.dateToDateTimeString(date);
+	}
+
+	private handleDurationInput(
+		duration: Date | number | null | undefined
+	): Date | number | null | undefined {
+		if (typeof duration === 'number') {
+			return duration * 60 * 1000;
+		}
+
+		return duration;
 	}
 }
