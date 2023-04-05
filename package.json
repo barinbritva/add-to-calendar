@@ -1,6 +1,6 @@
 {
 	"name": "@barinbritva/add-to-calendar",
-	"version": "0.1.1",
+	"version": "1.0.0",
 	"main": "./dist/index.js",
 	"files": ["/dist"],
 	"types": "./dist/__types__",
