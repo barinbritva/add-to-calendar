@@ -1,6 +1,18 @@
 {
 	"name": "@barinbritva/add-to-calendar",
 	"version": "1.0.0",
+	"keywords": [
+		"event",
+		"add",
+		"calendar",
+		"google",
+		"outlook",
+		"office365",
+		"yahoo",
+		"ics",
+		"ical",
+		"icalendar"
+	],
 	"main": "./dist/index.js",
 	"files": ["/dist"],
 	"types": "./dist/__types__",
