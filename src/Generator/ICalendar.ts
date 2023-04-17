@@ -10,7 +10,13 @@ export class ICalendar implements Generator {
 	public createLink(event: Event): string {
 		const eventData = this.convertEventToData(event);
 
-		return this.convertEventDataToFileContent(eventData);
+		return `data:text/calendar;charset=utf8,${this.dataPiecesToContent(eventData, true)}`;
+	}
+
+	public createFile(event: Event): string {
+		const eventData = this.convertEventToData(event);
+
+		return this.dataPiecesToContent(eventData);
 	}
 
 	private convertEventToData(event: Event): DataPiece[] {
@@ -70,7 +76,7 @@ export class ICalendar implements Generator {
 			.replace(/(\\n)[\s\t]+/gm, '\\n');
 	}
 
-	private convertEventDataToFileContent(data: DataPiece[]): string {
+	private dataPiecesToContent(data: DataPiece[], encode = false): string {
 		let fileParts: string[] = [];
 
 		for (const key in data) {
@@ -80,9 +86,11 @@ export class ICalendar implements Generator {
 				continue;
 			}
 
-			fileParts.push(`${dataItem.key}:${encodeURIComponent(dataItem.value)}`);
+			fileParts.push(
+				`${dataItem.key}:${encode ? encodeURIComponent(dataItem.value) : dataItem.value}`
+			);
 		}
 
-		return `data:text/calendar;charset=utf8,${fileParts.join('\n')}`;
+		return fileParts.join('\n');
 	}
 }
