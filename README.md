@@ -58,6 +58,21 @@ const linksObject = multiGenerator.createLinks(event)
 const array = multiGenerator.createLinks(event, true)
 ```
 
+Create an `ics` attachment:
+
+`createLink` method creates a link to use it with anchors:
+```typescript
+const icsLink = new ICalendar().createLink(event)
+return <a href=`${icsLink}`>Download ics file</a>
+```
+
+But if you need to attach an `ics` file, use `createFile` method:
+```typescript
+const icsFile = new ICalendar().createFile(event)
+// letter is a pseudo variable, read a doc of library you are using to send emails
+letter.attach(Buffer.from(icsFile));
+```
+
 ## 🐛 Wellknown issues
 
 * __Yahoo does not work properly with UTC timezone__. Currently looking if there are any workarounds.

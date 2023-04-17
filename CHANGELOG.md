@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `createFile` method to `ICalendar` class for creating `ics` attachments.
+
 ## [1.0.0] - 2022-04-05
 
 ### Added
