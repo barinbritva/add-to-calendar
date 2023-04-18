@@ -15,7 +15,7 @@ describe('class ICalendar method createFile', () => {
 		const fileContent = iCalendar.createFile(event);
 
 		expect(fileContent).toBe(
-			"BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:2021-06-18T15:00:00Z\nDTEND:2021-06-18T17:00:00Z\nSUMMARY:Meet with friends\nDESCRIPTION:Let's grab some coffee!\nLOCATION:Blue Bottle Coffee, 300 S Broadway, Los Angeles\nEND:VEVENT\nEND:VCALENDAR"
+			"BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:20210618T150000Z\nDTEND:20210618T170000Z\nSUMMARY:Meet with friends\nDESCRIPTION:Let's grab some coffee!\nLOCATION:Blue Bottle Coffee, 300 S Broadway, Los Angeles\nEND:VEVENT\nEND:VCALENDAR"
 		);
 	});
 });
