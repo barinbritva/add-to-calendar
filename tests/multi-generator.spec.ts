@@ -25,7 +25,7 @@ describe('class MultiGenerator method createLinks', () => {
 		const yahooLink =
 			'https://calendar.yahoo.com/?v=60&title=Meet%20with%20friends&st=20210618&et=20210619';
 		const icsData =
-			'data:text/calendar;charset=utf8,BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:2021-06-18\nDTEND:2021-06-19\nSUMMARY:Meet%20with%20friends\nEND:VEVENT\nEND:VCALENDAR';
+			'data:text/calendar;charset=utf8,BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:20210618\nDTEND:20210619\nSUMMARY:Meet%20with%20friends\nEND:VEVENT\nEND:VCALENDAR';
 
 		expect(linksObject.outlook).toEqual(outlookLink);
 		expect(linksObject.office365).toEqual(office365Link);
@@ -63,7 +63,7 @@ describe('class MultiGenerator method createLinks', () => {
 		const yahooLink =
 			"https://calendar.yahoo.com/?v=60&title=Meet%20with%20friends&st=20210618T150000Z&et=20210618T170000Z&desc=Let's%20grab%20some%20coffee!&in_loc=Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles&inv_list=Jane%3Cjane%40example.com%3E%2Cfred%40example.com%2Cjoe%40example.com";
 		const icsData =
-			"data:text/calendar;charset=utf8,BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:2021-06-18T15%3A00%3A00Z\nDTEND:2021-06-18T17%3A00%3A00Z\nSUMMARY:Meet%20with%20friends\nDESCRIPTION:Let's%20grab%20some%20coffee!\nLOCATION:Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles\nEND:VEVENT\nEND:VCALENDAR";
+			"data:text/calendar;charset=utf8,BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:20210618T150000Z\nDTEND:20210618T170000Z\nSUMMARY:Meet%20with%20friends\nDESCRIPTION:Let's%20grab%20some%20coffee!\nLOCATION:Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles\nEND:VEVENT\nEND:VCALENDAR";
 
 		expect(linksObject.outlook).toEqual(outlookLink);
 		expect(linksObject.office365).toEqual(office365Link);

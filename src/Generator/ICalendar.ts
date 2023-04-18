@@ -1,4 +1,5 @@
 import {Event} from '../Event';
+import {StringHelper} from '../Utils/StringHelper';
 import {Generator} from './Generator';
 
 export interface DataPiece {
@@ -35,11 +36,11 @@ export class ICalendar implements Generator {
 			},
 			{
 				key: 'DTSTART',
-				value: event.getStartDateAsString()
+				value: StringHelper.clearPunctuation(event.getStartDateAsString())
 			},
 			{
 				key: 'DTEND',
-				value: event.getEndDateAsString()
+				value: StringHelper.clearPunctuation(event.getEndDateAsString())
 			},
 			{
 				key: 'SUMMARY',
