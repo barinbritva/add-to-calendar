@@ -60,27 +60,70 @@ const array = multiGenerator.createLinks(event, true)
 
 Create an `ics` attachment:
 
-`createLink` method creates a link to use it with anchors:
+Method `createLink` is designed to create links for anchors:
 ```typescript
 const icsLink = new ICalendar().createLink(event)
 return <a href=`${icsLink}`>Download ics file</a>
 ```
 
-But if you need to attach an `ics` file, use `createFile` method:
+To create attachable `ics` files, use `createFile` method:
 ```typescript
 const icsFile = new ICalendar().createFile(event)
 // letter is a pseudo variable, read a doc of library you are using to send emails
 letter.attach(Buffer.from(icsFile));
 ```
 
-## 🐛 Wellknown issues
-
-* __Yahoo does not work properly with UTC timezone__. Currently looking if there are any workarounds.
-
 ## 💡 Guides
 
-* [`Event` API](https://barinbritva.github.io/add-to-calendar/classes/event.html). Read how to create and manage events.
-* `Date` creation. Avoiding troubles with time zones. _(Coming soon)_
+### Working with Event
+
+Read [Event API](https://barinbritva.github.io/add-to-calendar/classes/Event.html) to learn how to create, reschedule an event and manage its attendees.
+
+### Working with time zones
+
+The best practice to avoid troubles with time zones is to create all dates in UTC time zone. `add-to-calendar` will convert date\time to UTC anyway and calendar services convert them to user local machine time zone.
+
+#### Server
+
+If a server works in UTC time zone, create dates as usual:
+
+```typescript
+new Date(2021, 5, 18, 15, 0)
+```
+
+If a server is not set to UTC time zone, use `Date.UTC` method. Before doing that, calculate date\time relatively to UTC:
+
+```typescript
+// if a server is in GMT+3 time zone,
+// add 3 hours to desired date\time
+// new Date(2021, 5, 18, 15, 0) -> new Date(2021, 5, 18, 15 + 3, 0)
+new Date(Date.UTC(2021, 5, 18, 18, 0))
+```
+
+To calculate date\time in UTC automatically use a library for working with time zones, like [date-fns-tz](https://github.com/marnusw/date-fns-tz), or use the following approach:
+
+```typescript
+const date = new Date(2021, 5, 18, 15, 0);
+new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+```
+
+Tips:
+- To check if a server is set up to UTC time zone run `new Date().getTimezoneOffset()`. If the result is `0`, everything is set up. If no, configure a server.
+- To force `node.js` use UTC time zone without setting up server time, add `TZ=UTC` environment variable during an app launch, for example: `TZ=UTC node index.js`.
+
+#### Client
+
+On a client side, it's an option to use `Date` as usual:
+
+```typescript
+new Date(2021, 5, 18, 15, 0)
+```
+
+But calendar services use time zone not from user local machine, but from user settings at the service.
+
+For example, if a user is in GMT+3 time zone and uses Google Calendar, which is set up in GMT+3 time zone, everything will be OK. But if Google Calendar is set up in GMT+5, the date\time will be shifted by 2 hours.
+
+To avoid this pitfall, use technics from the section about server side.
 
 ## 🔙 Feedback
 Your feedback is really important for the project. Please, use contacts from [my profile](https://github.com/barinbritva) to send your questions, suggestions, help requests and others. Also, feel free to use [issues](https://github.com/barinbritva/add-to-calendar/issues) section to report bugs and problems.

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `Guides` section in README.md.
+
 ### Fixed
 
 - Compatibility of date\time format with Outlook Web.
