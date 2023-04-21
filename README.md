@@ -50,7 +50,7 @@ const generators = {
   ics: new ICalendar()
 }
 
-const multiGenerator = new MultiGenerator(generators);
+const multiGenerator = new MultiGenerator(generators)
 
 // Object of keys/values - key => link
 const linksObject = multiGenerator.createLinks(event)
@@ -70,7 +70,7 @@ To create attachable `ics` files, use `createFile` method:
 ```typescript
 const icsFile = new ICalendar().createFile(event)
 // letter is a pseudo variable, read a doc of library you are using to send emails
-letter.attach(Buffer.from(icsFile));
+letter.attach(Buffer.from(icsFile))
 ```
 
 ## 💡 Guides
@@ -103,8 +103,8 @@ new Date(Date.UTC(2021, 5, 18, 18, 0))
 To calculate date\time in UTC automatically use a library for working with time zones, like [date-fns-tz](https://github.com/marnusw/date-fns-tz), or use the following approach:
 
 ```typescript
-const date = new Date(2021, 5, 18, 15, 0);
-new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+const date = new Date(2021, 5, 18, 15, 0)
+new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000)
 ```
 
 Tips:
