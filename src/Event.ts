@@ -1,4 +1,5 @@
 import {Attendee} from './Attendee';
+import {Location} from './Location';
 import {DateHelper} from './Utils/DateHelper';
 
 /**
@@ -17,8 +18,8 @@ export class Event {
 	 * @param startDate - Event start date and time. For all day events it's enough to pass only date without time.
 	 * @param endDateOrDuration - Event date end or event duration in minutes. Leave empty for all day events.
 	 * @param description - Details about the event.
-	 * @param location - Place of the event. Just any address string.
-	 * @param attendees - List of people to invite.
+	 * @param location - Place of the event. Place name are required, geo coordinates are optional.
+	 * @param attendees - List of people to invite. The first one will be considered as the event organizer.
 	 * @param uid - Unique identifier of the event. Applicable only to ics files. Gives possibility to update the event invitation in the future by follow up email. If not provided, it will be generated automatically.
 	 */
 	constructor(
@@ -26,7 +27,7 @@ export class Event {
 		startDate: Date,
 		endDateOrDuration?: Date | number | null,
 		public description?: string,
-		public location?: string,
+		public location?: Location,
 		attendees: Attendee[] = [],
 		public uid?: string
 	) {
@@ -46,6 +47,22 @@ export class Event {
 
 	get endDate() {
 		return this._endDate || this.getNextDayAfterStartDate();
+	}
+
+	get locationName() {
+		if (this.location == null) {
+			return;
+		}
+
+		return typeof this.location === 'string' ? this.location : this.location[0];
+	}
+
+	get locationCoordinates() {
+		if (this.location == null) {
+			return;
+		}
+
+		return typeof this.location === 'string' ? undefined : this.location[1];
 	}
 
 	get attendees() {
@@ -117,7 +134,7 @@ export class Event {
 		return this;
 	}
 
-	public changeLocation(value: string): this {
+	public changeLocation(value: Location): this {
 		this.location = value;
 		return this;
 	}

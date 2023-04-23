@@ -25,7 +25,7 @@ export class Yahoo extends UrlGenerator {
 			st: StringHelper.clearPunctuation(event.getStartDateAsString()),
 			et: StringHelper.clearPunctuation(event.getEndDateAsString()),
 			desc: event.description,
-			in_loc: event.location,
+			in_loc: event.locationName,
 			inv_list: event.hasAttendees() ? this.convertAttendeesToString(event.attendees) : undefined
 		};
 	}

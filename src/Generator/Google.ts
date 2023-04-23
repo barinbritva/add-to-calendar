@@ -26,7 +26,7 @@ export class Google extends UrlGenerator {
 				'/' +
 				StringHelper.clearPunctuation(event.getEndDateAsString()),
 			details: event.description,
-			location: event.location,
+			location: event.locationName,
 			add: event.hasAttendees() ? this.convertAttendeesToString(event.attendees) : undefined
 		};
 	}

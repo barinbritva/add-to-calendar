@@ -101,17 +101,31 @@ export class ICalendar implements Generator {
 			{
 				key: 'DESCRIPTION',
 				value: this.escapeSpecialChars(event.description)
-			},
-			{
-				key: 'LOCATION',
-				value: this.escapeSpecialChars(event.location)
 			}
 		];
 
+		if (event.location != null) {
+			data.push({
+				key: 'LOCATION',
+				value: this.escapeSpecialChars(event.locationName)
+			});
+
+			if (event.locationCoordinates != null) {
+				event.locationCoordinates;
+				data.push({
+					key: 'GEO',
+					value: this.escapeSpecialChars(
+						`${event.locationCoordinates.latitude};${event.locationCoordinates.longitude}`
+					)
+				});
+			}
+		}
+
 		if (event.hasAttendees()) {
-			event.attendees.forEach((attendee) => {
-				let attendeeEmail;
-				let attendeeName;
+			event.attendees.forEach((attendee, index) => {
+				const attendeeType = index === 0 ? 'ORGANIZER' : 'ATTENDEE';
+				let attendeeEmail: string;
+				let attendeeName: string;
 				if (typeof attendee === 'string') {
 					attendeeEmail = attendee;
 					attendeeName = attendee;
@@ -121,8 +135,8 @@ export class ICalendar implements Generator {
 				}
 
 				data.push({
-					key: `ATTENDEE;CN="${attendeeName}"`,
-					value: 'mailto:' + attendeeEmail
+					key: `${attendeeType};CN="${attendeeName}"`,
+					value: this.escapeSpecialChars('mailto:' + attendeeEmail)
 				});
 			});
 		}
@@ -164,7 +178,9 @@ export class ICalendar implements Generator {
 			}
 
 			fileParts.push(
-				`${dataItem.key}:${encode ? encodeURIComponent(dataItem.value) : dataItem.value}`
+				`${encode ? encodeURIComponent(dataItem.key) : dataItem.key}` +
+					':' +
+					`${encode ? encodeURIComponent(dataItem.value) : dataItem.value}`
 			);
 		}
 

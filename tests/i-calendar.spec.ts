@@ -24,7 +24,10 @@ describe('class ICalendar method createFile', () => {
 			new Date(Date.UTC(2021, 5, 18, 15, 0)),
 			new Date(Date.UTC(2021, 5, 18, 17, 0)),
 			"Let's grab some coffee!",
-			'Blue Bottle Coffee, 300 S Broadway, Los Angeles',
+			[
+				'Blue Bottle Coffee, 300 S Broadway, Los Angeles',
+				{latitude: 34.0391997, longitude: -118.2327653}
+			],
 			[['jane@example.com', 'Jane'], ['fred@example.com'], 'joe@example.com'],
 			'unique-id'
 		);
@@ -34,7 +37,7 @@ describe('class ICalendar method createFile', () => {
 		clock.restore();
 
 		expect(fileContent).toBe(
-			'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//barinbritva//add-to-calendar//EN-US\nCALSCALE:GREGORIAN\nMETHOD:REQUEST\nBEGIN:VEVENT\nUID:unique-id\nDTSTAMP:20210617T063630Z\nDTSTART:20210618T150000Z\nDTEND:20210618T170000Z\nSUMMARY:Meet with friends\nDESCRIPTION:Let\'s grab some coffee!\nLOCATION:Blue Bottle Coffee, 300 S Broadway, Los Angeles\nATTENDEE;CN="Jane":mailto:jane@example.com\nATTENDEE;CN="fred@example.com":mailto:fred@example.com\nATTENDEE;CN="joe@example.com":mailto:joe@example.com\nEND:VEVENT\nEND:VCALENDAR'
+			'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//barinbritva//add-to-calendar//EN-US\nCALSCALE:GREGORIAN\nMETHOD:REQUEST\nBEGIN:VEVENT\nUID:unique-id\nDTSTAMP:20210617T063630Z\nDTSTART:20210618T150000Z\nDTEND:20210618T170000Z\nSUMMARY:Meet with friends\nDESCRIPTION:Let\'s grab some coffee!\nLOCATION:Blue Bottle Coffee, 300 S Broadway, Los Angeles\nGEO:34.0391997;-118.2327653\nORGANIZER;CN="Jane":mailto:jane@example.com\nATTENDEE;CN="fred@example.com":mailto:fred@example.com\nATTENDEE;CN="joe@example.com":mailto:joe@example.com\nEND:VEVENT\nEND:VCALENDAR'
 		);
 	});
 });

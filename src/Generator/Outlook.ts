@@ -26,7 +26,7 @@ export class Outlook extends UrlGenerator {
 			startdt: event.getStartDateAsString(),
 			enddt: event.getEndDateAsString(),
 			body: event.description,
-			location: event.location,
+			location: event.locationName,
 			allday: event.isAllDayEvent() ? String(event.isAllDayEvent()) : undefined,
 			to: event.hasAttendees() ? this.convertAttendeesToString(event.attendees) : undefined
 		};
