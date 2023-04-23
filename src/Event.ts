@@ -19,6 +19,7 @@ export class Event {
 	 * @param description - Details about the event.
 	 * @param location - Place of the event. Just any address string.
 	 * @param attendees - List of people to invite.
+	 * @param uid - Unique identifier of the event. Applicable only to ics files. Gives possibility to update the event invitation in the future by follow up email. If not provided, it will be generated automatically.
 	 */
 	constructor(
 		public title: string,
@@ -26,11 +27,15 @@ export class Event {
 		endDateOrDuration?: Date | number | null,
 		public description?: string,
 		public location?: string,
-		attendees: Attendee[] = []
+		attendees: Attendee[] = [],
+		public uid?: string
 	) {
 		this._startDate = startDate;
 		this.setEndDate(this.handleDurationInput(endDateOrDuration));
 		this._attendees = attendees;
+		if (this.uid == null) {
+			this.uid = 'barinbritva--add-to-calendar--' + Math.random().toString().substring(2);
+		}
 
 		this.assertDatesAreCorrect();
 	}
@@ -129,6 +134,11 @@ export class Event {
 
 	public hasAttendees(): boolean {
 		return this._attendees.length > 0;
+	}
+
+	public changeUid(uid: string): this {
+		this.uid = uid;
+		return this;
 	}
 
 	private getNextDayAfterStartDate(): Date {

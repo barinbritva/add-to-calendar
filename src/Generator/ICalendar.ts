@@ -1,4 +1,5 @@
 import {Event} from '../Event';
+import {DateHelper} from '../Utils/DateHelper';
 import {StringHelper} from '../Utils/StringHelper';
 import {Generator} from './Generator';
 
@@ -7,7 +8,38 @@ export interface DataPiece {
 	value: string | undefined;
 }
 
+export type Method = 'PUBLISH' | 'REQUEST' | 'REPLY' | 'ADD' | 'CANCEL';
+
+const publish: Method = 'PUBLISH';
+const request: Method = 'REQUEST';
+const reply: Method = 'REPLY';
+const add: Method = 'ADD';
+const cancel: Method = 'CANCEL';
+
+export const Methods = {
+	Publish: publish,
+	Request: request,
+	Reply: reply,
+	Add: add,
+	Cancel: cancel
+};
+
+export interface InvitationMeta {
+	contentLanguage: string;
+	method: Method;
+}
+
 export class ICalendar implements Generator {
+	private invitationMeta: InvitationMeta = {
+		contentLanguage: 'EN',
+		method: Methods.Publish
+	};
+
+	public configure(invitationMeta: Partial<InvitationMeta>): this {
+		this.invitationMeta = {...this.invitationMeta, ...invitationMeta};
+		return this;
+	}
+
 	public createLink(event: Event): string {
 		const eventData = this.convertEventToData(event);
 
@@ -21,7 +53,7 @@ export class ICalendar implements Generator {
 	}
 
 	private convertEventToData(event: Event): DataPiece[] {
-		return [
+		const data = [
 			{
 				key: 'BEGIN',
 				value: 'VCALENDAR'
@@ -31,8 +63,28 @@ export class ICalendar implements Generator {
 				value: '2.0'
 			},
 			{
+				key: 'PRODID',
+				value: '-//barinbritva//add-to-calendar//' + this.invitationMeta.contentLanguage
+			},
+			{
+				key: 'CALSCALE',
+				value: 'GREGORIAN'
+			},
+			{
+				key: 'METHOD',
+				value: this.invitationMeta.method
+			},
+			{
 				key: 'BEGIN',
 				value: 'VEVENT'
+			},
+			{
+				key: 'UID',
+				value: event.uid
+			},
+			{
+				key: 'DTSTAMP',
+				value: StringHelper.clearPunctuation(DateHelper.dateToDateTimeString(new Date()))
 			},
 			{
 				key: 'DTSTART',
@@ -53,7 +105,29 @@ export class ICalendar implements Generator {
 			{
 				key: 'LOCATION',
 				value: this.escapeSpecialChars(event.location)
-			},
+			}
+		];
+
+		if (event.hasAttendees()) {
+			event.attendees.forEach((attendee) => {
+				let attendeeEmail;
+				let attendeeName;
+				if (typeof attendee === 'string') {
+					attendeeEmail = attendee;
+					attendeeName = attendee;
+				} else {
+					attendeeEmail = attendee[0];
+					attendeeName = attendee[1] ?? attendee[0];
+				}
+
+				data.push({
+					key: `ATTENDEE;CN="${attendeeName}"`,
+					value: 'mailto:' + attendeeEmail
+				});
+			});
+		}
+
+		data.push(
 			{
 				key: 'END',
 				value: 'VEVENT'
@@ -62,7 +136,9 @@ export class ICalendar implements Generator {
 				key: 'END',
 				value: 'VCALENDAR'
 			}
-		];
+		);
+
+		return data;
 	}
 
 	private escapeSpecialChars(text?: string): string | undefined {
