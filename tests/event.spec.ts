@@ -1,4 +1,5 @@
 import {describe, expect, it} from 'vitest';
+import sinon from 'sinon';
 import {Event} from '../src';
 
 describe('class Event', () => {
@@ -25,7 +26,9 @@ describe('class Event', () => {
 	});
 
 	it('should do base features', () => {
+		const random = sinon.stub(Math, 'random').returns(0.9750872033575881);
 		const event = new Event('Meet with friends', new Date(Date.UTC(2021, 5, 18, 15, 0)));
+		random.restore();
 
 		expect(event.title).toEqual('Meet with friends');
 		expect(event.description).toEqual(undefined);
@@ -38,6 +41,7 @@ describe('class Event', () => {
 		expect(event.hasAttendees()).toEqual(false);
 		expect(event.attendees.length).toEqual(0);
 		expect(event.attendees).toEqual([]);
+		expect(event.uid).toEqual('barinbritva--add-to-calendar--9750872033575881');
 
 		event.changeTitle('Meet with friends and family');
 		expect(event.title).toEqual('Meet with friends and family');
@@ -61,6 +65,9 @@ describe('class Event', () => {
 		expect(event.hasAttendees()).toEqual(false);
 		expect(event.attendees.length).toEqual(0);
 		expect(event.attendees).toEqual([]);
+
+		event.changeUid('changed-uid');
+		expect(event.uid).toBe('changed-uid');
 	});
 
 	it('should reschedule start date', () => {
@@ -136,5 +143,21 @@ describe('class Event', () => {
 		expect(event.getStartDateAsString()).toEqual('2021-06-18');
 		expect(event.getEndDateAsString()).toEqual('2021-06-19');
 		expect(event.isAllDayEvent()).toEqual(true);
+	});
+
+	it('should set custom uid during constructing', () => {
+		const random = sinon.stub(Math, 'random').returns(0.9750872033575881);
+		const event = new Event(
+			'Meet with friends',
+			new Date(Date.UTC(2021, 5, 18, 15, 0)),
+			undefined,
+			undefined,
+			undefined,
+			[],
+			'constructor-provided-uid'
+		);
+		random.restore();
+
+		expect(event.uid).toBe('constructor-provided-uid');
 	});
 });

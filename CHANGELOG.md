@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- An `uid` property to `Event` class for proper events rescheduling using `ics` files.
+- Attendees list to `ics` file.
+- Geo coordinates for location to `ics` file.
+- Invitation method option to follow `ics` standards: publish, request, reply, add, cancel.
+- Content language option to follow `ics` standards.
+- Other `ics` related properties for better compatibility.
+
 ## [1.1.1] - 2022-04-18
 
 ### Changed
