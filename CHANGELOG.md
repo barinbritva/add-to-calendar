@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2022-04-24
+
 ### Added
 
 - An `uid` property to `Event` class for proper events rescheduling using `ics` files.
