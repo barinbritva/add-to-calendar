@@ -1,7 +1,6 @@
 import {describe, expect, it, beforeAll, afterAll} from 'vitest';
 import sinon from 'sinon';
-import {Event, ICalendar} from '../src';
-import {Methods} from '../src/Generator/ICalendar';
+import {Event, ICalendar, Methods} from '../src';
 
 const random = sinon.stub(Math, 'random');
 
