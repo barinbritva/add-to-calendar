@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2023-11-04
+
+### Changed
+
+- Module system changed from `UMD` to 'ES6' for better compatibility with bundlers
+- Inner refactoring of `RSVP` methods
+
 ## [1.2.1] - 2022-04-24
 
 ### Added

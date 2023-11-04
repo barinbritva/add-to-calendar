@@ -10,18 +10,12 @@ export interface DataPiece {
 
 export type Method = 'PUBLISH' | 'REQUEST' | 'REPLY' | 'ADD' | 'CANCEL';
 
-const publish: Method = 'PUBLISH';
-const request: Method = 'REQUEST';
-const reply: Method = 'REPLY';
-const add: Method = 'ADD';
-const cancel: Method = 'CANCEL';
-
 export const Methods = {
-	Publish: publish,
-	Request: request,
-	Reply: reply,
-	Add: add,
-	Cancel: cancel
+	Publish: 'PUBLISH' as const,
+	Request: 'REQUEST' as const,
+	Reply: 'REPLY' as const,
+	Add: 'ADD' as const,
+	Cancel: 'CANCEL' as const
 };
 
 export interface InvitationMeta {
