@@ -16,7 +16,6 @@
 		// Production specific
 		"removeComments": true,
 		"sourceMap": false,
-		"watch": false,
 		// Checks
 		"allowUnreachableCode": false,
 		"noFallthroughCasesInSwitch": true,

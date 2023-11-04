@@ -23,12 +23,11 @@
 	"engineStrict": true,
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
-		"build": "ts-node ./tasks/run-build.ts",
-		"build:dev": "ts-node --project ./tsconfig-dev.json ./tasks/run-build.ts -d",
+		"build": "tsc",
+		"build:dev": "tsc --project ./tsconfig-dev.json -w",
 		"test": "vitest run",
 		"test:dev": "vitest watch",
 		"test:coverage": "vitest run --coverage",
-		"release": "ts-node ./tasks/run-release.ts",
 		"typedoc": "typedoc --out docs src/index.ts",
 		"prettier:lint": "prettier --check \"./src/**/*.{ts,tsx,json}\"",
 		"prettier:fix": "prettier --write \"./src/**/*.{ts,tsx,json}\""
