@@ -31,9 +31,9 @@ describe('class MultiGenerator method createLinks', () => {
 		clock.restore();
 
 		const outlookLink =
-			'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18&enddt=2021-06-19&allday=true';
+			'https://outlook.live.com/calendar/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18&enddt=2021-06-19&allday=true';
 		const office365Link =
-			'https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18&enddt=2021-06-19&allday=true';
+			'https://outlook.office.com/calendar/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18&enddt=2021-06-19&allday=true';
 		const googleLink =
 			'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20with%20friends&dates=20210618%2F20210619';
 		const yahooLink =
@@ -72,9 +72,9 @@ describe('class MultiGenerator method createLinks', () => {
 		clock.restore();
 
 		const outlookLink =
-			"https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18T15%3A00%3A00Z&enddt=2021-06-18T17%3A00%3A00Z&body=Let's%20grab%20some%20coffee!&location=Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles&to=Jane%3Cjane%40example.com%3E%2Cfred%40example.com%2Cjoe%40example.com";
+			"https://outlook.live.com/calendar/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18T15%3A00%3A00Z&enddt=2021-06-18T17%3A00%3A00Z&body=Let's%20grab%20some%20coffee!&location=Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles&to=Jane%3Cjane%40example.com%3E%2Cfred%40example.com%2Cjoe%40example.com";
 		const office365Link =
-			"https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18T15%3A00%3A00Z&enddt=2021-06-18T17%3A00%3A00Z&body=Let's%20grab%20some%20coffee!&location=Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles&to=Jane%3Cjane%40example.com%3E%2Cfred%40example.com%2Cjoe%40example.com";
+			"https://outlook.office.com/calendar/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=Meet%20with%20friends&startdt=2021-06-18T15%3A00%3A00Z&enddt=2021-06-18T17%3A00%3A00Z&body=Let's%20grab%20some%20coffee!&location=Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles&to=Jane%3Cjane%40example.com%3E%2Cfred%40example.com%2Cjoe%40example.com";
 		const googleLink =
 			"https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meet%20with%20friends&dates=20210618T150000Z%2F20210618T170000Z&details=Let's%20grab%20some%20coffee!&location=Blue%20Bottle%20Coffee%2C%20300%20S%20Broadway%2C%20Los%20Angeles&add=Jane%3Cjane%40example.com%3E%2Cfred%40example.com%2Cjoe%40example.com";
 		const yahooLink =

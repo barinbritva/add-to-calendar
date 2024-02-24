@@ -16,7 +16,7 @@ interface QueryParameters extends QueryObject {
 }
 
 export class Outlook extends UrlGenerator {
-	protected urlBase = 'https://outlook.live.com/calendar/0/deeplink/compose';
+	protected urlBase = 'https://outlook.live.com/calendar/deeplink/compose';
 
 	protected convertEventToQueryObject(event: Event): QueryParameters {
 		return {

@@ -2,20 +2,36 @@ name: Release
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v*'
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - id: get-package
+        run: |
+          echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
+          echo "::set-output name=tag::$(echo ${GITHUB_REF#refs/tags/} | grep -oP '(?<=\d\.\d\.\d-)\w+' || echo 'latest')"
+        shell: bash
+
       # Reuse steps from Pull Request workflow
       - uses: actions/checkout@v3
+
+      - name: Check version
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [[ "${{steps.get-package.outputs.version}}" != "v${PACKAGE_VERSION}" ]]; then
+            echo "Tag version ${{steps.get-package.outputs.version}} does not match package version ${PACKAGE_VERSION}."
+            exit 1
+          fi
+
       - uses: pnpm/action-setup@v2
         with:
           version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+          registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
       - run: pnpm -r --frozen-lockfile install
 
@@ -25,13 +41,7 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-      - name: Create .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> .npmrc
-
       - name: Publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
-
-      - name: Delete .npmrc
-        run: rm .npmrc
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access=public --tag=${{ steps.get-package.outputs.tag }}
