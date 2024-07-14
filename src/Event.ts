@@ -12,6 +12,7 @@ export class Event {
 	private _endDate: Date | null = null;
 	private duration: number | null = null;
 	private _attendees: Attendee[];
+	private _reminderInMinuets: number | null = null;
 
 	/**
 	 * @param title - Event title.
@@ -67,6 +68,10 @@ export class Event {
 
 	get attendees() {
 		return this._attendees;
+	}
+
+	get reminder(): number | null {
+		return this._reminderInMinuets;
 	}
 
 	/**
@@ -155,6 +160,19 @@ export class Event {
 
 	public changeUid(uid: string): this {
 		this.uid = uid;
+		return this;
+	}
+
+	/**
+	 * Set a reminder for the event.
+	 *
+	 * Applicable only for the `ICS` files. Web links don't support reminder parameter.
+	 *
+	 * @param minutes - Minutes before the event to remind.
+	 * @returns The event. You can chain this method.
+	 */
+	public setReminder(minutes: number): this {
+		this._reminderInMinuets = minutes;
 		return this;
 	}
 

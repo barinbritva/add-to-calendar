@@ -160,4 +160,11 @@ describe('class Event', () => {
 
 		expect(event.uid).toBe('constructor-provided-uid');
 	});
+
+	it('should have a reminder', () => {
+		const event = new Event('Meet with friends', new Date(Date.UTC(2021, 5, 18, 15, 0)));
+		event.setReminder(11);
+
+		expect(event.reminder).toBe(11);
+	});
 });

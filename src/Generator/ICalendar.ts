@@ -11,12 +11,12 @@ export interface DataPiece {
 export type Method = 'PUBLISH' | 'REQUEST' | 'REPLY' | 'ADD' | 'CANCEL';
 
 export const Methods = {
-	Publish: 'PUBLISH' as const,
-	Request: 'REQUEST' as const,
-	Reply: 'REPLY' as const,
-	Add: 'ADD' as const,
-	Cancel: 'CANCEL' as const
-};
+	Publish: 'PUBLISH',
+	Request: 'REQUEST',
+	Reply: 'REPLY',
+	Add: 'ADD',
+	Cancel: 'CANCEL'
+} as const;
 
 export interface InvitationMeta {
 	contentLanguage: string;
@@ -133,6 +133,31 @@ export class ICalendar implements Generator {
 					value: this.escapeSpecialChars('mailto:' + attendeeEmail)
 				});
 			});
+		}
+
+		if (event.reminder != null) {
+			data.push(
+				{
+					key: 'BEGIN',
+					value: 'VALARM'
+				},
+				{
+					key: 'TRIGGER',
+					value: `-PT${event.reminder}M`
+				},
+				{
+					key: 'ACTION',
+					value: 'DISPLAY'
+				},
+				{
+					key: 'DESCRIPTION',
+					value: this.escapeSpecialChars(event.title)
+				},
+				{
+					key: 'END',
+					value: 'VALARM'
+				}
+			);
 		}
 
 		data.push(

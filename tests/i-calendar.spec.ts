@@ -30,13 +30,14 @@ describe('class ICalendar method createFile', () => {
 			[['jane@example.com', 'Jane'], ['fred@example.com'], 'joe@example.com'],
 			'unique-id'
 		);
+		event.setReminder(23);
 
 		const clock = sinon.useFakeTimers(new Date(Date.UTC(2021, 5, 17, 6, 36, 30)));
 		const fileContent = iCalendar.createFile(event);
 		clock.restore();
 
 		expect(fileContent).toBe(
-			'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//barinbritva//add-to-calendar//EN-US\nCALSCALE:GREGORIAN\nMETHOD:REQUEST\nBEGIN:VEVENT\nUID:unique-id\nDTSTAMP:20210617T063630Z\nDTSTART:20210618T150000Z\nDTEND:20210618T170000Z\nSUMMARY:Meet with friends\nDESCRIPTION:Let\'s grab some coffee!\nLOCATION:Blue Bottle Coffee, 300 S Broadway, Los Angeles\nGEO:34.0391997;-118.2327653\nORGANIZER;CN="Jane":mailto:jane@example.com\nATTENDEE;CN="fred@example.com":mailto:fred@example.com\nATTENDEE;CN="joe@example.com":mailto:joe@example.com\nEND:VEVENT\nEND:VCALENDAR'
+			'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//barinbritva//add-to-calendar//EN-US\nCALSCALE:GREGORIAN\nMETHOD:REQUEST\nBEGIN:VEVENT\nUID:unique-id\nDTSTAMP:20210617T063630Z\nDTSTART:20210618T150000Z\nDTEND:20210618T170000Z\nSUMMARY:Meet with friends\nDESCRIPTION:Let\'s grab some coffee!\nLOCATION:Blue Bottle Coffee, 300 S Broadway, Los Angeles\nGEO:34.0391997;-118.2327653\nORGANIZER;CN="Jane":mailto:jane@example.com\nATTENDEE;CN="fred@example.com":mailto:fred@example.com\nATTENDEE;CN="joe@example.com":mailto:joe@example.com\nBEGIN:VALARM\nTRIGGER:-PT23M\nACTION:DISPLAY\nDESCRIPTION:Meet with friends\nEND:VALARM\nEND:VEVENT\nEND:VCALENDAR'
 		);
 	});
 });
