@@ -1,58 +1,60 @@
 {
-	"name": "@barinbritva/add-to-calendar",
-	"version": "1.3.2",
-	"keywords": [
-		"event",
-		"add",
-		"calendar",
-		"google",
-		"outlook",
-		"office365",
-		"yahoo",
-		"ics",
-		"ical",
-		"icalendar"
-	],
-	"main": "./dist/index.js",
-	"files": ["/dist"],
-	"types": "./dist/__types__",
-	"engines": {
-		"node": ">=18.0.0",
-		"pnpm": ">=8.0.0"
-	},
-	"engineStrict": true,
-	"scripts": {
-		"preinstall": "npx only-allow pnpm",
-		"build": "tsc",
-		"build:dev": "tsc --project ./tsconfig-dev.json -w",
-		"test": "vitest run",
-		"test:dev": "vitest watch",
-		"test:coverage": "vitest run --coverage",
-		"typedoc": "typedoc --out docs src/index.ts",
-		"prettier:lint": "prettier --check \"./src/**/*.{ts,tsx,json}\"",
-		"prettier:fix": "prettier --write \"./src/**/*.{ts,tsx,json}\""
-	},
-	"author": {
-		"name": "Barin Britva",
-		"email": "barinbritva@outlook.com",
-		"url": "https://barinbritva.ru"
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"@types/node": "^18.15.11",
-		"@types/sinon": "^10.0.14",
-		"@vitest/coverage-c8": "^0.29.8",
-		"lefthook": "^1.3.8",
-		"prettier": "^2.8.7",
-		"sinon": "^15.0.4",
-		"ts-node": "^9.1.1",
-		"typedoc": "^0.23.28",
-		"typescript": "^5.0.2",
-		"vite": "^4.2.1",
-		"vitest": "^0.29.8"
-	},
-	"volta": {
-		"node": "18.19.1",
-		"pnpm": "8.15.4"
-	}
+  "name": "@barinbritva/add-to-calendar",
+  "version": "1.4.0-next.0",
+  "keywords": [
+    "event",
+    "add",
+    "calendar",
+    "google",
+    "outlook",
+    "office365",
+    "yahoo",
+    "ics",
+    "ical",
+    "icalendar"
+  ],
+  "main": "./dist/index.js",
+  "files": [
+    "/dist"
+  ],
+  "types": "./dist/__types__",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "tsc",
+    "build:dev": "tsc --project ./tsconfig-dev.json -w",
+    "test": "vitest run",
+    "test:dev": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "typedoc": "typedoc --out docs src/index.ts",
+    "prettier:lint": "prettier --check \"./src/**/*.{ts,tsx,json}\"",
+    "prettier:fix": "prettier --write \"./src/**/*.{ts,tsx,json}\""
+  },
+  "author": {
+    "name": "Barin Britva",
+    "email": "barinbritva@outlook.com",
+    "url": "https://barinbritva.ru"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/sinon": "^10.0.14",
+    "@vitest/coverage-c8": "^0.29.8",
+    "lefthook": "^1.3.8",
+    "prettier": "^2.8.7",
+    "sinon": "^15.0.4",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.23.28",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.1",
+    "vitest": "^0.29.8"
+  },
+  "volta": {
+    "node": "18.19.1",
+    "pnpm": "8.15.4"
+  }
 }
